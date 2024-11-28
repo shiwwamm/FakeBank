@@ -57,5 +57,28 @@ namespace FakeBank.Controllers
             return new JsonResult(usersByEmail.Count);
         }
 
+        public async Task<IActionResult> ImportAccountsAsync()
+        {
+            Dictionary<String, User> accountUsers = await db.Users.ToDictionaryAsync(e => e.Email);
+
+            CsvConfiguration config = new(CultureInfo.InvariantCulture)
+            {
+                HasHeaderRecord = true,
+                HeaderValidated = null
+            };
+
+            int accountsCount = 0;
+            using (StreamReader reader = new(_pathName))
+            using (CsvReader csv = new(reader, config)) {
+
+                IEnumerable<AllUserAndAccounts>? records = csv.GetRecords<AllUserAndAccounts>();
+                
+                foreach (AllUserAndAccounts record in records) {
+
+            }
+
+
+        }
+
     }
 }
