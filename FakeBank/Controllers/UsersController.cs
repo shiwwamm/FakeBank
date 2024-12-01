@@ -36,7 +36,7 @@ namespace FakeBank.Controllers
             return user;
         }
 
-        [HttpGet]
+        [HttpGet("totalbalance/{id}")]
         public async Task<ActionResult<UserBalance>> GetUserBalance( long id )
         {
             User? user = await _context.Users.FindAsync(id);
