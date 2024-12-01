@@ -15,7 +15,7 @@ public partial class Card
 
     public string Expiration { get; set; } = null!;
 
-    public string Cvv { get; set; } = null!;
+    public int Cvv { get; set; }
 
     public string Status { get; set; } = null!;
 

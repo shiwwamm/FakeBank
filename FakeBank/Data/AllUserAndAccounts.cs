@@ -7,11 +7,11 @@
         public string last_name { get; set; } = null!;
         public string email { get; set; } = null!;
         public string phone_number { get; set; } = null!;
-        public string account_number { get; set; } = null!;
-        public string routing_number { get; set; } = null!;
+        public long account_number { get; set; } 
+        public long routing_number { get; set; }
         public string account_status { get; set; } = null!;
         public string account_type { get; set; } = null!;
-        public double account_balance { get; set; }
+        public decimal account_balance { get; set; }
         public string card_number { get; set; } = null!;
         public string card_expiration { get; set; } = null!;
         public int card_cvv { get; set; }
