@@ -1,4 +1,5 @@
 ﻿using DataModel;
+using FakeBank.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -33,6 +34,26 @@ namespace FakeBank.Controllers
                 return NotFound();
             }
             return user;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<UserBalance>> GetUserBalance( long id )
+        {
+            User? user = await _context.Users.FindAsync(id);
+
+            if (user == null) { return NotFound(); }
+
+            decimal totalBalance = await _context.Accounts.Where(x => x.UserId == id).Select(x => x.Balance).SumAsync();
+
+            UserBalance userBalance = new()
+            {
+                UserId = user.UserId,
+                UserEmail = user.Email,
+                Balance = totalBalance
+            };
+
+            return userBalance;
+
         }
 
         [HttpPost]
