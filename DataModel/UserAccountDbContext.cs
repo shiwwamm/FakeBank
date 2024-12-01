@@ -22,8 +22,6 @@ public partial class UserAccountDbContext : DbContext
 
     public virtual DbSet<Entry> Entries { get; set; }
 
-    public virtual DbSet<Loan> Loans { get; set; }
-
     public virtual DbSet<Transfer> Transfers { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
@@ -134,32 +132,6 @@ public partial class UserAccountDbContext : DbContext
                 .HasForeignKey(d => d.AccountId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__entries__account__33D4B598");
-        });
-
-        modelBuilder.Entity<Loan>(entity =>
-        {
-            entity.HasKey(e => e.LoadId).HasName("PK__loans__08CE0C5AE8683318");
-
-            entity.ToTable("loans");
-
-            entity.Property(e => e.LoadId).HasColumnName("load_id");
-            entity.Property(e => e.Amount).HasColumnName("amount");
-            entity.Property(e => e.Duration).HasColumnName("duration");
-            entity.Property(e => e.Interest).HasColumnName("interest");
-            entity.Property(e => e.IssueDate)
-                .HasMaxLength(255)
-                .IsUnicode(false)
-                .HasColumnName("issue_date");
-            entity.Property(e => e.Type)
-                .HasMaxLength(255)
-                .IsUnicode(false)
-                .HasColumnName("type");
-            entity.Property(e => e.UserId).HasColumnName("user_id");
-
-            entity.HasOne(d => d.User).WithMany(p => p.Loans)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__loans__user_id__36B12243");
         });
 
         modelBuilder.Entity<Transfer>(entity =>
