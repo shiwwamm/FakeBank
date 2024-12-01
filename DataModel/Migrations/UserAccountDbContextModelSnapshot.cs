@@ -163,53 +163,6 @@ namespace DataModel.Migrations
                     b.ToTable("entries", (string)null);
                 });
 
-            modelBuilder.Entity("DataModel.Loan", b =>
-                {
-                    b.Property<long>("LoadId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("load_id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("LoadId"));
-
-                    b.Property<long>("Amount")
-                        .HasColumnType("bigint")
-                        .HasColumnName("amount");
-
-                    b.Property<int>("Duration")
-                        .HasColumnType("int")
-                        .HasColumnName("duration");
-
-                    b.Property<int>("Interest")
-                        .HasColumnType("int")
-                        .HasColumnName("interest");
-
-                    b.Property<string>("IssueDate")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("issue_date");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("type");
-
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("user_id");
-
-                    b.HasKey("LoadId")
-                        .HasName("PK__loans__08CE0C5AE8683318");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("loans", (string)null);
-                });
-
             modelBuilder.Entity("DataModel.Transfer", b =>
                 {
                     b.Property<long>("TransferId")
@@ -336,17 +289,6 @@ namespace DataModel.Migrations
                     b.Navigation("Account");
                 });
 
-            modelBuilder.Entity("DataModel.Loan", b =>
-                {
-                    b.HasOne("DataModel.User", "User")
-                        .WithMany("Loans")
-                        .HasForeignKey("UserId")
-                        .IsRequired()
-                        .HasConstraintName("FK__loans__user_id__36B12243");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("DataModel.Transfer", b =>
                 {
                     b.HasOne("DataModel.Account", "FromAccount")
@@ -382,8 +324,6 @@ namespace DataModel.Migrations
                     b.Navigation("Accounts");
 
                     b.Navigation("Cards");
-
-                    b.Navigation("Loans");
                 });
 #pragma warning restore 612, 618
         }

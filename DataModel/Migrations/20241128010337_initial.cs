@@ -50,29 +50,7 @@ namespace DataModel.Migrations
                         principalTable: "users",
                         principalColumn: "user_id");
                 });
-
-            migrationBuilder.CreateTable(
-                name: "loans",
-                columns: table => new
-                {
-                    load_id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    user_id = table.Column<long>(type: "bigint", nullable: false),
-                    issue_date = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
-                    duration = table.Column<int>(type: "int", nullable: false),
-                    interest = table.Column<int>(type: "int", nullable: false),
-                    amount = table.Column<long>(type: "bigint", nullable: false),
-                    type = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK__loans__08CE0C5AE8683318", x => x.load_id);
-                    table.ForeignKey(
-                        name: "FK__loans__user_id__36B12243",
-                        column: x => x.user_id,
-                        principalTable: "users",
-                        principalColumn: "user_id");
-                });
+            
 
             migrationBuilder.CreateTable(
                 name: "cards",
@@ -193,9 +171,6 @@ namespace DataModel.Migrations
 
             migrationBuilder.DropTable(
                 name: "entries");
-
-            migrationBuilder.DropTable(
-                name: "loans");
 
             migrationBuilder.DropTable(
                 name: "transfers");
