@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Account } from './Account';
+import { environment } from '../../environments/environment.development';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-accounts',
@@ -7,6 +10,22 @@ import { Component } from '@angular/core';
   templateUrl: './accounts.component.html',
   styleUrl: './accounts.component.css'
 })
-export class AccountsComponent {
+export class AccountsComponent implements OnInit{
+  
+  public accounts: Account[] = [];
+
+  constructor( private http: HttpClient)  {}
+  ngOnInit(): void {
+    this.getAccounts();
+  }
+
+  getAccounts() {
+    this.http.get<Account[]>(`${environment.baseUrl}/api/Accounts`).subscribe(
+      {
+        next: result => this.accounts = result,
+        error: e => console.error(e)
+      }
+    );
+  }
 
 }

@@ -12,13 +12,13 @@ import { environment } from '../../environments/environment.development';
 })
 export class UserComponent implements OnInit {
   public users: User[] = [];
-  constructor(private https: HttpClient) {} 
+  constructor(private http: HttpClient) {} 
   
   ngOnInit(): void {
     this.getUsers();
   }
   getUsers() {
-    this.https.get<User[]>(`${environment.baseUrl}/api/Users`).subscribe(
+    this.http.get<User[]>(`${environment.baseUrl}/api/Users`).subscribe(
       {
         next: result => this.users = result,
         error: e => console.error(e)
